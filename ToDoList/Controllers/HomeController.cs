@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ToDoList.Models;
 
@@ -9,8 +8,8 @@ namespace ToDoList.Conntrollers
         [HttpGet("/")]
         public ActionResult Index()
         {
-            List<Item> allITems = Item.GetAll();
-            return View(allITems);
+            Item starterItem = new Item("Add first item to To Do List");
+            return View(starterItem);
         }
 
         [HttpGet("/items/new")]
@@ -23,7 +22,7 @@ namespace ToDoList.Conntrollers
         public ActionResult Create(string description)
         {
             Item myItem = new Item(description);
-            return RedirectToAction("Index");
+            return View("Index", myItem);
         }
     }
 }
